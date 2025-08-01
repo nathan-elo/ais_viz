@@ -76,7 +76,7 @@ with gauche:
     
     m = folium.Map(location=[47,1], zoom_start=5, tiles='OpenStreetMap')
     folium.GeoJson(
-    "C:/Users/nathan.heslault/Desktop/DATA/aistest/viz/heatmap.geojson",
+    "heatmap.geojson",
     style_function=style_function
     ).add_to(m)
     Draw(export=True).add_to(m)
