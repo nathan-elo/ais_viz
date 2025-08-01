@@ -38,54 +38,32 @@ def haversine_dist_m(lat1 : float, lon1 : float, lat2 : float, lon2 : float) -> 
 
     return 6371.0 * c*1000
 
-def load_config():
-    with open("mdp.json") as f:
-        return json.load(f)
-
-config = load_config()
 
 def connect_pgsql_bigdata() -> Optional[psycopg2.extensions.connection]:
-    """
-    Crée une connexion à la base PostgreSQL. (schema bigdata)
-
-    Returns:
-        psycopg2.extensions.connection: Objet connexion PostgreSQL.
-    """
     try:
-        conn = psycopg2.connect(**config["local"])
+        conn = psycopg2.connect(**st.secrets["local"])
         return conn
     except Exception as e:
         st.error(f"Erreur de connexion en local : {e}")
         return None
 
 def connect_pgsql() -> Optional[psycopg2.extensions.connection]:
-    """
-    Crée une connexion à la base PostgreSQL. (schema postgres)
-
-    Returns:
-        psycopg2.extensions.connection: Objet connexion PostgreSQL.
-    """
     try:
-        conn = psycopg2.connect(**config["pgsql"])
+        conn = psycopg2.connect(**st.secrets["pgsql"])
         return conn
     except Exception as e:
         st.error(f"Erreur de connexion à la VM : {e}")
         return None
-
 
 def connect_vm() -> Optional[psycopg2.extensions.connection]:
-    """
-    Crée une connexion à la base PostgreSQL de la machine virtuelle.
-
-    Returns:
-        psycopg2.extensions.connection: Objet connexion PostgreSQL.
-    """
     try:
-        conn = psycopg2.connect(**config["vm"])
+        conn = psycopg2.connect(**st.secrets["vm"])
         return conn
     except Exception as e:
         st.error(f"Erreur de connexion à la VM : {e}")
         return None
+
+
        
 @st.cache_data
 def get_points(date_start : datetime, 
