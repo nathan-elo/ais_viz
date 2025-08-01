@@ -1,0 +1,11 @@
+streamlit~=1.46
+streamlit-folium~=0.25
+folium~=0.20
+matplotlib~=3.10
+pandas~=2.3
+psycopg2~=2.9
+geopandas~=1.1
+shapely~=2.1
+numpy~=2.2
+pyproj~=3.7
+numerize~=0.12
